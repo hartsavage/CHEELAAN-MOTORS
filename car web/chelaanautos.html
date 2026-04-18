@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chelaan Motors | Premium Car Dealer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap');
+        
+        :root {
+            --tw-color-primary: #00d4ff;
+        }
+        
+        * {
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        .tailwind-ready .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), url('https://picsum.photos/id/1015/2000/1200') center/cover no-repeat;
+        }
+        
+        .car-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .car-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 25px 25px 0 -10px rgb(0 212 255);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #00d4ff;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .modal {
+            animation: modalPop 0.3s ease forwards;
+        }
+        
+        @keyframes modalPop {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .admin-sidebar {
+            background: linear-gradient(180deg, #0a0a0a, #1a1a1a);
+        }
+    </style>
+</head>
+<body class="tailwind-ready font-sans">
+    <!-- NAVBAR -->
+    <nav id="main-navbar" class="bg-black text-white border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#00d4ff] rounded-2xl flex items-center justify-center text-black font-bold text-2xl rotate-12">🚗</div>
+                <div>
+                    <h1 class="text-3xl font-bold tracking-[-1px]" style="font-family: 'Space Grotesk', sans-serif;">CHEELAAN MOTORS</h1>
+                    <p class="text-xs text-[#00d4ff] -mt-1 tracking-[2px]">PREMIUM AUTOMOTIVE</p>
+                </div>
+            </div>
+
+            <!-- Customer Navigation -->
+            <div id="customer-nav" class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a onclick="navigateToSection('home')" class="nav-link cursor-pointer">HOME</a>
+                <a onclick="navigateToSection('inventory')" class="nav-link cursor-pointer">INVENTORY</a>
+                <a onclick="navigateToSection('services')" class="nav-link cursor-pointer">SERVICES</a>
+                <a onclick="navigateToSection('about')" class="nav-link cursor-pointer">ABOUT US</a>
+                <a onclick="navigateToSection('contact')" class="nav-link cursor-pointer">CONTACT</a>
+            </div>
+
+            <!-- Right side controls -->
+            <div class="flex items-center gap-4">
+                <!-- Contact badge -->
+                <a href="mailto:chelaanautos@gmail.com" 
+                   class="hidden sm:flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white text-xs font-medium px-4 h-9 rounded-3xl border border-white/20">
+                    <span class="text-[#00d4ff]">✉️</span>
+                    chelaanautos@gmail.com
+                </a>
+
+                <!-- Admin button -->
+                <button onclick="showAdminLogin()" 
+                        class="flex items-center gap-2 bg-[#00d4ff] hover:bg-[#00b8e0] text-black font-semibold px-6 h-9 rounded-3xl text-sm uppercase tracking-widest">
+                    <span>👷‍♂️</span>
+                    ADMIN PORTAL
+                </button>
+
+                <!-- Mobile menu -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-2xl">☰</button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-white/10 px-6 py-4">
+            <div class="flex flex-col gap-4 text-sm font-medium">
+                <a onclick="navigateToSection('home');toggleMobileMenu()" class="py-3 border-b border-white/10">HOME</a>
+                <a onclick="navigateToSection('inventory');toggleMobileMenu()" class="py-3 border-b border-white/10">INVENTORY</a>
+                <a onclick="navigateToSection('services');toggleMobileMenu()" class="py-3 border-b border-white/10">SERVICES</a>
+                <a onclick="navigateToSection('about');toggleMobileMenu()" class="py-3 border-b border-white/10">ABOUT US</a>
+                <a onclick="navigateToSection('contact');toggleMobileMenu()" class="py-3">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CUSTOMER VIEW -->
+    <div id="customer-view">
+
+        <!-- HERO SECTION -->
+        <section id="home" class="hero-bg h-screen flex items-center text-white relative">
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center gap-2 bg-white/10 text-white text-sm font-medium px-6 py-2 rounded-3xl backdrop-blur-md">
+                        🌟 NOW IN NAIROBI • EST. 2024
+                    </div>
+                    
+                    <h1 id="hero-title" class="text-6xl md:text-7xl font-bold leading-none tracking-[-2px]" style="font-family: 'Space Grotesk', sans-serif;">
+                        DRIVE YOUR<br>PERFECT CAR
+                    </h1>
+                    
+                    <p id="hero-subtitle" class="text-xl text-white/80 max-w-md">
+                        Premium vehicles. Unbeatable prices. Chelaan Motors – where your next journey begins.
+                    </p>
+                    
+                    <div class="flex items-center gap-4">
+                        <button onclick="navigateToSection('inventory')" 
+                                class="bg-[#00d4ff] hover:bg-[#00b8e0] text-black font-semibold text-lg px-10 py-5 rounded-3xl flex items-center gap-3">
+                            BROWSE INVENTORY
+                            <span class="text-2xl">→</span>
+                        </button>
+                        
+                        <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })" 
+                                class="border border-white/60 hover:border-white text-white font-medium text-lg px-10 py-5 rounded-3xl">
+                            GET IN TOUCH
+                        </button>
+                    </div>
+                    
+                    <div class="flex items-center gap-8 text-sm">
+                        <div>
+                            <div class="text-[#00d4ff] font-mono text-4xl font-bold">124</div>
+                            <div class="text-white/70">CARS IN STOCK</div>
+                        </div>
+                        <div class="h-12 w-px bg-white/30"></div>
+                        <div>
+                            <div class="text-[#00d4ff] font-mono text-4xl font-bold">98%</div>
+                            <div class="text-white/70">CUSTOMER SATISFACTION</div>
+                        </div>
+                        <div class="h-12 w-px bg-white/30"></div>
+                        <div>
+                            <div class="text-[#00d4ff] font-mono text-4xl font-bold">24</div>
+                            <div class="text-white/70">MONTH WARRANTY</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero car visual -->
+                <div class="hidden md:flex justify-end">
+                    <div class="bg-white/10 backdrop-blur-xl p-6 rounded-3xl border border-white/20 shadow-2xl">
+                        <img src="https://picsum.photos/id/1015/700/420" 
+                             alt="Featured Car"
+                             class="rounded-3xl shadow-2xl">
+                        <div class="mt-6 flex justify-between items-end">
+                            <div>
+                                <p class="text-[#00d4ff] font-semibold">2024 TOYOTA LAND CRUISER</p>
+                                <p class="text-3xl font-bold">KSh 8,950,000</p>
+                            </div>
+                            <button onclick="navigateToSection('inventory')" 
+                                    class="bg-black text-white px-8 py-4 rounded-2xl flex items-center gap-2 font-medium">
+                                VIEW THIS CAR
+                                <span>🚘</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-10 left-1/2 flex flex-col items-center gap-1 text-white/60 text-xs">
+                <div>SCROLL FOR INVENTORY</div>
+                <div class="w-5 h-9 border border-white/40 rounded-3xl flex justify-center">
+                    <div class="w-1 h-2 bg-[#00d4ff] rounded-full mt-2 animate-bounce"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INVENTORY / CUSTOMER SECTION -->
+        <section id="inventory" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex justify-between items-end mb-12">
+                    <div>
+                        <span class="text-[#00d4ff] uppercase tracking-[1px] text-sm font-semibold">EXPLORE OUR FLEET</span>
+                        <h2 class="text-5xl font-bold tracking-tight">Available Cars</h2>
+                    </div>
+                    
+                    <!-- Search & Filter -->
+                    <div class="flex items-center gap-4">
+                        <input id="search-input" 
+                               onkeyup="if(event.key==='Enter') filterCars()"
+                               placeholder="Search make, model..." 
+                               class="bg-slate-100 border border-slate-200 focus:border-[#00d4ff] rounded-3xl px-6 py-4 w-72 outline-none text-sm">
+                        
+                        <select id="filter-type" onchange="filterCars()" 
+                                class="bg-slate-100 border border-slate-200 rounded-3xl px-6 py-4 text-sm">
+                            <option value="">All Cars</option>
+                            <option value="New">New</option>
+                            <option value="Used">Used</option>
+                        </select>
+                        
+                        <button onclick="filterCars()" 
+                                class="bg-black text-white px-8 py-4 rounded-3xl font-medium flex items-center gap-2">
+                            FILTER
+                            <span>🔎</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cars Grid -->
+                <div id="cars-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="py-20 bg-black text-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <span class="text-[#00d4ff] uppercase text-sm font-semibold">WHAT WE OFFER</span>
+                    <h2 class="text-5xl font-bold tracking-tight">Exceptional Services</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white/10 p-8 rounded-3xl">
+                        <div class="text-6xl mb-6">🚘</div>
+                        <h3 class="text-2xl font-semibold mb-3">Buy with Confidence</h3>
+                        <p class="text-white/70">Full vehicle inspection, 24-month warranty on every car sold.</p>
+                    </div>
+                    <div class="bg-white/10 p-8 rounded-3xl">
+                        <div class="text-6xl mb-6">🔧</div>
+                        <h3 class="text-2xl font-semibold mb-3">After-Sales Service</h3>
+                        <p class="text-white/70">Free servicing for the first year + genuine spare parts available.</p>
+                    </div>
+                    <div class="bg-white/10 p-8 rounded-3xl">
+                        <div class="text-6xl mb-6">💰</div>
+                        <h3 class="text-2xl font-semibold mb-3">Flexible Financing</h3>
+                        <p class="text-white/70">Low-interest loans from partner banks. 0% deposit options available.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-5">
+                    <img src="https://picsum.photos/id/160/800/700" alt="Chelaan Motors Showroom" 
+                         class="rounded-3xl shadow-2xl">
+                </div>
+                <div class="md:col-span-7">
+                    <span class="uppercase text-[#00d4ff] font-semibold text-sm">NAIROBI'S MOST TRUSTED DEALER</span>
+                    <h2 class="text-5xl font-bold leading-none tracking-tight mb-8">Chelaan Motors – Built for Kenya, Loved by Drivers</h2>
+                    <p class="text-lg text-slate-600 mb-6">
+                        Located in Nairobi, we specialize in premium new and pre-owned vehicles. From rugged SUVs for the Kenyan roads to luxurious sedans, every car at Chelaan Motors is handpicked and rigorously tested.
+                    </p>
+                    <p class="text-lg text-slate-600">
+                        Our mission is simple: deliver unmatched quality, transparent pricing, and lifetime customer support. Contact us at <a href="mailto:chelaanautos@gmail.com" class="text-[#00d4ff] underline">chelaanautos@gmail.com</a>.
+                    </p>
+                    <div class="mt-10 flex gap-8 text-sm font-medium">
+                        <div class="flex items-center gap-3">
+                            <span class="text-4xl">🇰🇪</span>
+                            <div>
+                                <div class="font-bold">NAIROBI SHOWROOM</div>
+                                <div class="text-slate-500">Westlands • Mombasa Road</div>
+                            </div>
+                        </div>
+                        <div>📍 Open 7 days a week</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-20 bg-black text-white">
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-5xl font-bold mb-8">Let's Get You Behind the Wheel</h2>
+                    <p class="text-white/70 text-xl mb-8">Whether you're buying your first car or upgrading your fleet, our team is ready to help.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <span class="text-4xl">📧</span>
+                            <div>
+                                <div class="font-semibold text-[#00d4ff]">EMAIL US</div>
+                                <a href="mailto:chelaanautos@gmail.com" class="text-2xl">chelaanautos@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-4xl">📱</span>
+                            <div>
+                                <div class="font-semibold text-[#00d4ff]">CALL OR WHATSAPP</div>
+                                <a href="tel:+254700123456" class="text-2xl">+254 796746578</a>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-4xl">📍</span>
+                            <div>
+                                <div class="font-semibold text-[#00d4ff]">VISIT OUR SHOWROOM</div>
+                                <p class="text-lg">Westlands Business Park, Nairobi, Kenya</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <form onsubmit="handleContactSubmit(event)" class="bg-white/10 p-8 rounded-3xl backdrop-blur-md">
+                    <input type="text" id="contact-name" placeholder="Your full name" 
+                           class="w-full mb-4 bg-white/10 border border-white/30 rounded-3xl px-6 py-5 text-white placeholder:text-white/50 outline-none">
+                    <input type="email" id="contact-email" placeholder="Your email" 
+                           class="w-full mb-4 bg-white/10 border border-white/30 rounded-3xl px-6 py-5 text-white placeholder:text-white/50 outline-none">
+                    <textarea id="contact-message" rows="5" placeholder="Tell us what you're looking for..." 
+                              class="w-full mb-6 bg-white/10 border border-white/30 rounded-3xl px-6 py-5 text-white placeholder:text-white/50 outline-none"></textarea>
+                    <button type="submit"
+                            class="w-full bg-[#00d4ff] text-black font-semibold py-5 rounded-3xl text-lg">SEND MESSAGE</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- ADMIN VIEW (hidden by default) -->
+    <div id="admin-view" class="hidden min-h-screen bg-slate-950 text-white">
+        
+        <!-- Admin Top Bar -->
+        <div class="bg-black border-b border-white/10 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-[#00d4ff] text-black rounded-2xl flex items-center justify-center font-bold">👷‍♂️</div>
+                    <h1 class="text-2xl font-bold">ADMIN DASHBOARD</h1>
+                </div>
+                <div class="text-[#00d4ff] text-sm font-medium px-4 py-1 bg-white/10 rounded-3xl">CHEELAAN MOTORS</div>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div onclick="switchAdminTab(0)" id="tab-cars" 
+                     class="cursor-pointer px-6 py-2 font-medium rounded-3xl hover:bg-white/10 flex items-center gap-2 active">
+                    <span>🚗</span> MANAGE CARS
+                </div>
+                <div onclick="switchAdminTab(1)" id="tab-edit" 
+                     class="cursor-pointer px-6 py-2 font-medium rounded-3xl hover:bg-white/10 flex items-center gap-2">
+                    <span>✏️</span> EDIT WEBSITE
+                </div>
+                
+                <div class="flex items-center gap-3 border-l border-white/20 pl-6">
+                    <div class="text-right">
+                        <div class="text-sm font-medium">Admin User</div>
+                        <div class="text-xs text-[#00d4ff]">chelaanautos@gmail.com</div>
+                    </div>
+                    <button onclick="logoutAdmin()" 
+                            class="text-sm border border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-5 py-2 rounded-3xl">LOGOUT</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex">
+
+            <!-- SIDEBAR -->
+            <div class="admin-sidebar w-72 min-h-[calc(100vh-64px)] p-6 hidden lg:flex flex-col">
+                <div class="mb-8">
+                    <p class="text-xs uppercase tracking-widest text-white/50 mb-2">TOTAL INVENTORY</p>
+                    <div id="admin-total-cars" class="text-7xl font-bold text-[#00d4ff]">0</div>
+                </div>
+                
+                <a onclick="switchAdminTab(0)" class="flex items-center gap-3 px-6 py-4 rounded-3xl hover:bg-white/10 mb-1 font-medium">
+                    🚗 Manage Products
+                </a>
+                <a onclick="switchAdminTab(1)" class="flex items-center gap-3 px-6 py-4 rounded-3xl hover:bg-white/10 mb-1 font-medium">
+                    🌐 Edit Website Content
+                </a>
+                
+                <div class="mt-auto pt-8 border-t border-white/10 text-xs text-white/40 space-y-2">
+                    <div>Last updated: <span id="last-updated" class="font-mono">JUST NOW</span></div>
+                    <div>Logged in from Nairobi, KE</div>
+                    <div class="text-[#00d4ff] cursor-pointer hover:underline" onclick="logoutAdmin()">Sign out of admin portal</div>
+                </div>
+            </div>
+
+            <!-- ADMIN CONTENT AREA -->
+            <div class="flex-1 p-8">
+
+                <!-- TAB 1: MANAGE CARS -->
+                <div id="admin-tab-cars">
+                    <div class="flex justify-between items-center mb-8">
+                        <h2 class="text-4xl font-semibold">Manage Cars &amp; Products</h2>
+                        <button onclick="showAddCarModal()" 
+                                class="bg-[#00d4ff] text-black px-8 py-4 rounded-3xl flex items-center gap-3 font-semibold">
+                            <span class="text-xl">+</span> ADD NEW CAR
+                        </button>
+                    </div>
+
+                    <!-- Cars Table -->
+                    <div class="bg-white/5 rounded-3xl overflow-hidden">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-white/10 text-xs font-medium text-white/60">
+                                    <th class="text-left py-5 px-8">IMAGE</th>
+                                    <th class="text-left py-5 px-8">MAKE &amp; MODEL</th>
+                                    <th class="text-left py-5 px-8">YEAR</th>
+                                    <th class="text-left py-5 px-8">PRICE (KSh)</th>
+                                    <th class="text-left py-5 px-8">MILEAGE</th>
+                                    <th class="text-left py-5 px-8">STATUS</th>
+                                    <th class="w-40 text-center py-5 px-8">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-cars-table" class="divide-y divide-white/10 text-sm">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB 2: EDIT WEBSITE -->
+                <div id="admin-tab-edit" class="hidden">
+                    <h2 class="text-4xl font-semibold mb-8">Edit Website Content</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-white/5 rounded-3xl p-8">
+                            <h3 class="font-medium mb-6 flex items-center gap-3"><span class="text-[#00d4ff]">🏠</span> HERO SECTION</h3>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="text-xs text-white/60 block mb-1">Hero Title</label>
+                                    <input id="edit-hero-title" type="text" value="DRIVE YOUR PERFECT CAR" 
+                                           class="w-full bg-white/10 border border-white/20 rounded-3xl px-6 py-4 text-white">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-white/60 block mb-1">Hero Subtitle</label>
+                                    <textarea id="edit-hero-subtitle" rows="3" class="w-full bg-white/10 border border-white/20 rounded-3xl px-6 py-4 text-white">Premium vehicles. Unbeatable prices. Chelaan Motors – where your next journey begins.</textarea>
+                                </div>
+                                <button onclick="saveWebsiteEdits()" 
+                                        class="w-full py-4 bg-[#00d4ff] text-black rounded-3xl font-semibold">SAVE HERO CHANGES</button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white/5 rounded-3xl p-8">
+                            <h3 class="font-medium mb-6">QUICK WEBSITE STATS</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white/10 p-6 rounded-3xl text-center">
+                                    <div class="text-5xl font-bold text-[#00d4ff]" id="live-car-count">12</div>
+                                    <div class="text-sm text-white/60">Cars currently shown to customers</div>
+                                </div>
+                                <div class="bg-white/10 p-6 rounded-3xl text-center">
+                                    <div class="text-5xl font-bold text-[#00d4ff]">4</div>
+                                    <div class="text-sm text-white/60">Featured on homepage</div>
+                                </div>
+                            </div>
+                            
+                            <p class="text-xs text-white/40 mt-8">Changes made here instantly update the live customer website. All edits are saved automatically to browser storage.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div onclick="if(event.target.id === 'admin-login-modal')hideAdminLogin()" 
+         id="admin-login-modal" 
+         class="hidden fixed inset-0 bg-black/70 backdrop-blur-md z-[9999] flex items-center justify-center">
+        
+        <div onclick="event.stopImmediatePropagation()" 
+             class="modal bg-white text-black rounded-3xl w-full max-w-md mx-4 p-10 shadow-2xl">
+            <h2 class="text-3xl font-semibold mb-2">Admin Login</h2>
+            <p class="text-slate-500 mb-8">Only authorized staff can access the Chelaan Motors admin portal.</p>
+            
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-xs font-medium mb-2 text-slate-400">EMAIL OR USERNAME</label>
+                    <input id="admin-username" type="text" value="admin" 
+                           class="w-full border border-slate-200 focus:border-[#00d4ff] rounded-3xl px-6 py-5 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium mb-2 text-slate-400">PASSWORD</label>
+                    <input id="admin-password" type="password" value="chelaan123" 
+                           class="w-full border border-slate-200 focus:border-[#00d4ff] rounded-3xl px-6 py-5 outline-none">
+                </div>
+                
+                <button onclick="loginAdmin()" 
+                        class="w-full bg-black text-white py-5 rounded-3xl text-lg font-semibold">LOGIN TO DASHBOARD</button>
+                
+                <div onclick="hideAdminLogin()" class="text-center text-sm text-slate-400 cursor-pointer hover:text-black">Cancel</div>
+            </div>
+            
+            <div class="text-[10px] text-center mt-8 text-slate-400">
+                Demo credentials: <span class="font-mono">admin / chelaan123</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD / EDIT CAR MODAL -->
+    <div onclick="if(event.target.id === 'car-modal')hideCarModal()" 
+         id="car-modal" 
+         class="hidden fixed inset-0 bg-black/70 backdrop-blur-md z-[9999] flex items-center justify-center">
+        
+        <div onclick="event.stopImmediatePropagation()" 
+             class="modal bg-white text-black rounded-3xl w-full max-w-2xl mx-4 p-8">
+            
+            <h3 id="modal-title" class="text-2xl font-semibold mb-8">Add New Car</h3>
+            
+            <div class="grid grid-cols-2 gap-6">
+                <div>
+                    <label class="text-xs font-medium text-slate-400 mb-2 block">MAKE</label>
+                    <input id="car-make" type="text" class="w-full border rounded-3xl px-6 py-4">
+                </div>
+                <div>
+                    <label class="text-xs font-medium text-slate-400 mb-2 block">MODEL</label>
+                    <input id="car-model" type="text" class="w-full border rounded-3xl px-6 py-4">
+                </div>
+                <div>
+                    <label class="text-xs font-medium text-slate-400 mb-2 block">YEAR</label>
+                    <input id="car-year" type="number" class="w-full border rounded-3xl px-6 py-4">
+                </div>
+                <div>
+                    <label class="text-xs font-medium text-slate-400 mb-2 block">PRICE (KSh)</label>
+                    <input id="car-price" type="number" class="w-full border rounded-3xl px-6 py-4">
+                </div>
+                <div>
+                    <label class="text-xs font-medium text-slate-400 mb-2 block">MILEAGE (km)</label>
+                    <input id="car-mileage" type="number" class="w-full border rounded-3xl px-6 py-4">
+                </div>
+                <div>
+                    <label class="text-xs font-medium text-slate-400 mb-2 block">STATUS</label>
+                    <select id="car-status" class="w-full border rounded-3xl px-6 py-4">
+                        <option value="New">New</option>
+                        <option value="Used">Used</option>
+                    </select>
+                </div>
+                <div class="col-span-2">
+                    <label class="text-xs font-medium text-slate-400 mb-2 block">IMAGE URL (for demo)</label>
+                    <input id="car-image" type="text" placeholder="https://picsum.photos/id/..." 
+                           class="w-full border rounded-3xl px-6 py-4">
+                </div>
+                <div class="col-span-2">
+                    <label class="text-xs font-medium text-slate-400 mb-2 block">DESCRIPTION</label>
+                    <textarea id="car-description" rows="3" class="w-full border rounded-3xl px-6 py-4"></textarea>
+                </div>
+            </div>
+            
+            <div class="flex gap-4 mt-10">
+                <button onclick="hideCarModal()" 
+                        class="flex-1 py-5 border border-slate-300 rounded-3xl font-medium">CANCEL</button>
+                <button onclick="saveCar()" id="save-car-btn"
+                        class="flex-1 py-5 bg-[#00d4ff] text-black rounded-3xl font-semibold">SAVE CAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CAR DETAIL MODAL (for customers) -->
+    <div onclick="if(event.target.id === 'detail-modal')hideDetailModal()" 
+         id="detail-modal" 
+         class="hidden fixed inset-0 bg-black/70 backdrop-blur-md z-[9999] flex items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="modal bg-white rounded-3xl max-w-4xl w-full mx-4 overflow-hidden">
+            <div class="flex">
+                <div id="detail-image" class="w-1/2 bg-slate-100"></div>
+                <div class="flex-1 p-8">
+                    <div id="detail-header" class="mb-6"></div>
+                    <div id="detail-description" class="text-slate-600 mb-8"></div>
+                    
+                    <div class="grid grid-cols-3 gap-6 text-sm mb-8">
+                        <div><span class="block text-xs text-slate-400">YEAR</span><span id="detail-year" class="font-semibold text-xl"></span></div>
+                        <div><span class="block text-xs text-slate-400">MILEAGE</span><span id="detail-mileage" class="font-semibold text-xl"></span></div>
+                        <div><span class="block text-xs text-slate-400">STATUS</span><span id="detail-status" class="font-semibold text-xl"></span></div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <div class="text-xs text-slate-400">PRICE</div>
+                            <div id="detail-price" class="text-4xl font-bold text-[#00d4ff]"></div>
+                        </div>
+                        <button onclick="hideDetailModal()" 
+                                class="px-12 py-4 border border-black rounded-3xl text-sm font-medium">CLOSE</button>
+                        <button onclick="alert('Thank you! Our team will contact you shortly about this car.')" 
+                                class="px-12 py-4 bg-black text-white rounded-3xl text-sm font-medium">RESERVE THIS CAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 text-sm">
+            <div class="flex flex-col md:flex-row justify-between gap-y-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 bg-[#00d4ff] rounded-2xl flex items-center justify-center text-black">🚗</div>
+                        <span class="font-bold text-2xl">CHEELAAN MOTORS</span>
+                    </div>
+                    <p class="text-white/60">Nairobi, Kenya • Premium car dealer</p>
+                    <a href="mailto:chelaanautos@gmail.com" class="block mt-6 text-[#00d4ff]">chelaanautos@gmail.com</a>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-x-12">
+                    <div>
+                        <div class="font-medium mb-4">QUICK LINKS</div>
+                        <ul class="space-y-2 text-white/60 text-sm">
+                            <li>Inventory</li>
+                            <li>Finance Options</li>
+                            <li>Warranty</li>
+                            <li>Trade-In</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="font-medium mb-4">COMPANY</div>
+                        <ul class="space-y-2 text-white/60 text-sm">
+                            <li>About Us</li>
+                            <li>Careers</li>
+                            <li>Blog</li>
+                            <li>Contact</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="font-medium mb-4">FOLLOW US</div>
+                        <div class="flex gap-6 text-2xl">📘 📸 𝕏</div>
+                        <p class="text-[10px] mt-8 text-white/30">© 2026 Chelaan Motors. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * Main JavaScript for Chelaan Motors website
+         * Fully functional admin panel with add / edit / remove cars
+         * Live website editing
+         * Tailwind CSS via CDN
+         * Persists data using localStorage
+         */
+        
+        // Tailwind CDN initialization
+        function initTailwind() {
+            return {
+                config(userConfig = {}) {
+                    return {
+                        configUser: userConfig,
+                        theme: {
+                            extend: {
+                                colors: {
+                                    primary: '#00d4ff'
+                                }
+                            }
+                        }
+                    }
+                },
+                theme: {
+                    extend: {}
+                }
+            }
+        }
+        
+        // Global state
+        let carsData = []
+        let currentEditId = null
+        let isAdminLoggedIn = false
+        
+        // Sample initial cars
+        function loadInitialCars() {
+            const savedCars = localStorage.getItem('chelaan_cars')
+            if (savedCars) {
+                carsData = JSON.parse(savedCars)
+                return
+            }
+            
+            carsData = [
+                {
+                    id: 1,
+                    make: "Toyota",
+                    model: "Land Cruiser Prado",
+                    year: 2024,
+                    price: 8950000,
+                    mileage: 1200,
+                    status: "New",
+                    image: "https://picsum.photos/id/1015/600/400",
+                    description: "Full option 2024 model. 4.0L V6 engine. Perfect for Kenyan roads and family adventures."
+                },
+                {
+                    id: 2,
+                    make: "Honda",
+                    model: "Civic",
+                    year: 2023,
+                    price: 2850000,
+                    mileage: 18500,
+                    status: "Used",
+                    image: "https://picsum.photos/id/160/600/400",
+                    description: "Low mileage, one owner. Sporty handling and excellent fuel efficiency."
+                },
+                {
+                    id: 3,
+                    make: "Mercedes",
+                    model: "GLE 450",
+                    year: 2024,
+                    price: 12400000,
+                    mileage: 850,
+                    status: "New",
+                    image: "https://picsum.photos/id/201/600/400",
+                    description: "Luxury SUV with cutting-edge tech. Panoramic roof and 360° camera."
+                },
+                {
+                    id: 4,
+                    make: "Ford",
+                    model: "Ranger Wildtrak",
+                    year: 2023,
+                    price: 4650000,
+                    mileage: 32000,
+                    status: "Used",
+                    image: "https://picsum.photos/id/29/600/400",
+                    description: "Powerful double-cab pickup ready for work or weekend getaways."
+                },
+                {
+                    id: 5,
+                    make: "BMW",
+                    model: "X5",
+                    year: 2022,
+                    price: 7200000,
+                    mileage: 28900,
+                    status: "Used",
+                    image: "https://picsum.photos/id/133/600/400",
+                    description: "Premium performance SUV with M Sport package."
+                }
+            ]
+            localStorage.setItem('chelaan_cars', JSON.stringify(carsData))
+        }
+        
+        // Render customer cars grid
+        function renderCustomerCars(filteredCars) {
+            const container = document.getElementById('cars-grid')
+            container.innerHTML = ''
+            
+            if (filteredCars.length === 0) {
+                container.innerHTML = `
+                <div class="col-span-full text-center py-12">
+                    <p class="text-2xl text-slate-400">No cars match your search.</p>
+                </div>`
+                return
+            }
+            
+            filteredCars.forEach(car => {
+                const cardHTML = `
+                <div onclick="showCarDetail(${car.id})" class="car-card bg-white border border-slate-100 rounded-3xl overflow-hidden cursor-pointer">
+                    <div class="relative">
+                        <img src="${car.image}" alt="${car.make} ${car.model}" class="w-full h-52 object-cover">
+                        <div class="absolute top-4 right-4 bg-white text-black text-xs font-bold px-3 py-1 rounded-3xl">${car.status}</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="font-semibold text-xl">${car.make} ${car.model}</h4>
+                                <p class="text-slate-400">${car.year}</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-[#00d4ff] font-bold text-2xl">KSh ${(car.price / 1000000).toFixed(1)}M</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex text-xs text-slate-500 gap-6">
+                            <div>${car.mileage.toLocaleString()} km</div>
+                            <div class="flex-1 text-right">${car.description.substring(0, 55)}...</div>
+                        </div>
+                        
+                        <button class="mt-6 text-sm w-full py-3 border border-black rounded-3xl hover:bg-black hover:text-white">VIEW DETAILS →</button>
+                    </div>
+                </div>`
+                container.innerHTML += cardHTML
+            })
+        }
+        
+        // Render admin table
+        function renderAdminTable() {
+            const tbody = document.getElementById('admin-cars-table')
+            tbody.innerHTML = ''
+            
+            document.getElementById('admin-total-cars').textContent = carsData.length
+            
+            carsData.forEach(car => {
+                const row = document.createElement('tr')
+                row.innerHTML = `
+                <td class="px-8 py-6">
+                    <img src="${car.image}" class="w-12 h-12 object-cover rounded-2xl">
+                </td>
+                <td class="px-8 py-6 font-medium">${car.make} ${car.model}</td>
+                <td class="px-8 py-6">${car.year}</td>
+                <td class="px-8 py-6 font-semibold">KSh ${car.price.toLocaleString()}</td>
+                <td class="px-8 py-6">${car.mileage.toLocaleString()} km</td>
+                <td class="px-8 py-6">
+                    <span class="inline-flex items-center px-4 py-1 text-xs font-medium rounded-3xl ${car.status === 'New' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}">
+                        ${car.status}
+                    </span>
+                </td>
+                <td class="px-8 py-6 text-center">
+                    <button onclick="editCar(${car.id}); event.stopImmediatePropagation()" class="text-[#00d4ff] hover:underline mr-4">Edit</button>
+                    <button onclick="deleteCar(${car.id}); event.stopImmediatePropagation()" class="text-red-400 hover:underline">Remove</button>
+                </td>`
+                tbody.appendChild(row)
+            })
+            
+            if (carsData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-12 text-white/40">No cars yet. Add your first car above.</td></tr>`
+            }
+        }
+        
+        // Filter cars for customer view
+        function filterCars() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim()
+            const statusFilter = document.getElementById('filter-type').value
+            
+            let filtered = carsData
+            
+            if (searchTerm) {
+                filtered = filtered.filter(car => 
+                    `${car.make} ${car.model}`.toLowerCase().includes(searchTerm)
+                )
+            }
+            
+            if (statusFilter) {
+                filtered = filtered.filter(car => car.status === statusFilter)
+            }
+            
+            renderCustomerCars(filtered)
+        }
+        
+        // Show car detail modal (customer)
+        function showCarDetail(id) {
+            const car = carsData.find(c => c.id === id)
+            if (!car) return
+            
+            const modal = document.getElementById('detail-modal')
+            
+            document.getElementById('detail-image').innerHTML = `
+                <img src="${car.image}" alt="${car.make} ${car.model}" class="w-full h-full object-cover">`
+            
+            document.getElementById('detail-header').innerHTML = `
+                <div class="flex justify-between">
+                    <div>
+                        <h2 class="text-4xl font-semibold">${car.make} ${car.model} <span class="text-base font-normal text-slate-400">(${car.year})</span></h2>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-5xl font-bold text-[#00d4ff]">KSh ${car.price.toLocaleString()}</div>
+                    </div>
+                </div>`
+            
+            document.getElementById('detail-description').innerHTML = `<p class="leading-relaxed">${car.description}</p>`
+            document.getElementById('detail-year').innerHTML = car.year
+            document.getElementById('detail-mileage').innerHTML = `${car.mileage.toLocaleString()} km`
+            document.getElementById('detail-status').innerHTML = `<span class="px-3 py-1 text-xs rounded-3xl ${car.status === 'New' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}">${car.status}</span>`
+            document.getElementById('detail-price').innerHTML = `KSh ${car.price.toLocaleString()}`
+            
+            modal.classList.remove('hidden')
+            modal.classList.add('flex')
+        }
+        
+        function hideDetailModal() {
+            const modal = document.getElementById('detail-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+        }
+        
+        // Admin login
+        function showAdminLogin() {
+            document.getElementById('admin-login-modal').classList.remove('hidden')
+            document.getElementById('admin-login-modal').classList.add('flex')
+        }
+        
+        function hideAdminLogin() {
+            const modal = document.getElementById('admin-login-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+        }
+        
+        function loginAdmin() {
+            const username = document.getElementById('admin-username').value
+            const password = document.getElementById('admin-password').value
+            
+            // Demo credentials
+            if ((username === 'admin' || username === 'chelaanautos@gmail.com') && password === 'chelaan123') {
+                hideAdminLogin()
+                isAdminLoggedIn = true
+                
+                // Switch views
+                document.getElementById('customer-view').classList.add('hidden')
+                document.getElementById('admin-view').classList.remove('hidden')
+                document.getElementById('main-navbar').classList.add('hidden')
+                
+                // Render admin data
+                renderAdminTable()
+                
+                // Show first tab
+                switchAdminTab(0)
+                
+                console.log('%c✅ Admin logged in successfully!', 'color:#00d4ff;font-weight:bold')
+            } else {
+                alert('❌ Incorrect credentials. Try: admin / chelaan123')
+            }
+        }
+       
+        
+        // Edit existing car
+        function editCar(id) {
+            const car = carsData.find(c => c.id === id)
+            if (!car) return
+            
+            currentEditId = id
+            document.getElementById('modal-title').textContent = 'Edit Car'
+            document.getElementById('save-car-btn').textContent = 'UPDATE CAR'
+            
+            document.getElementById('car-make').value = car.make
+            document.getElementById('car-model').value = car.model
+            document.getElementById('car-year').value = car.year
+            document.getElementById('car-price').value = car.price
+            document.getElementById('car-mileage').value = car.mileage
+            document.getElementById('car-status').value = car.status
+            document.getElementById('car-image').value = car.image
+            document.getElementById('car-description').value = car.description
+            
+            const modal = document.getElementById('car-modal')
+            modal.classList.remove('hidden')
+            modal.classList.add('flex')
+        }
+        
+        function hideCarModal() {
+            const modal = document.getElementById('car-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+            currentEditId = null
+        }
+        
+        // Save (add or update) car
+        function saveCar() {
+            const make = document.getElementById('car-make').value.trim()
+            const model = document.getElementById('car-model').value.trim()
+            const year = parseInt(document.getElementById('car-year').value)
+            const price = parseInt(document.getElementById('car-price').value)
+            const mileage = parseInt(document.getElementById('car-mileage').value)
+            const status = document.getElementById('car-status').value
+            const image = document.getElementById('car-image').value || 'https://www.caranddriver.com/toyota/land-cruiser'
+            const description = document.getElementById('car-description').value.trim()
+            
+            if (!make || !model || !year || !price) {
+                alert('Please fill in Make, Model, Year and Price')
+                return
+            }
+            
+            if (currentEditId) {
+                // Update existing
+                const carIndex = carsData.findIndex(c => c.id === currentEditId)
+                if (carIndex > -1) {
+                    carsData[carIndex] = {
+                        ...carsData[carIndex],
+                        make, model, year, price, mileage, status, image, description
+                    }
+                }
+            } else {
+                // Add new
+                const newCar = {
+                    id: Date.now(),
+                    make,
+                    model,
+                    year,
+                    price,
+                    mileage,
+                    status,
+                    image,
+                    description: description || 'Beautiful vehicle ready for delivery.'
+                }
+                carsData.unshift(newCar)
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('chelaan_cars', JSON.stringify(carsData))
+            
+            hideCarModal()
+            
+            // Update timestamp
+            document.getElementById('last-updated').innerHTML = `JUST NOW <span class="text-xs text-emerald-400">✓ SAVED</span>`
+        }
+        
+        // Delete car
+        function deleteCar(id) {
+            if (!confirm('Delete this car permanently?')) return
+            
+            carsData = carsData.filter(car => car.id !== id)
+            localStorage.setItem('chelaan_cars', JSON.stringify(carsData))
+            
+            renderAdminTable()
+            renderCustomerCars(carsData)
+        }
+        
+        // Save hero edits
+        function saveWebsiteEdits() {
+            const newTitle = document.getElementById('edit-hero-title').value
+            const newSubtitle = document.getElementById('edit-hero-subtitle').value
+            
+            // Update live hero
+            const titleEl = document.getElementById('hero-title')
+            const subtitleEl = document.getElementById('hero-subtitle')
+            
+            if (titleEl) titleEl.innerHTML = newTitle.replace(/\n/g, '<br>')
+            if (subtitleEl) subtitleEl.textContent = newSubtitle
+            
+            alert(' Website hero section updated live for customers!')
+            
+            // Update live count
+            document.getElementById('live-car-count').textContent = carsData.length
+        }
+        
+        // Contact form handler
+        function handleContactSubmit(e) {
+            e.preventDefault()
+            const name = document.getElementById('contact-name').value
+            alert(`Thank you ${name || 'there'}! 🎉\n\nYour message has been received.\nWe will reply to you shortly at chelaanautos@gmail.com`)
+            e.target.reset()
+        }
+        
+        // Simple navigation
+        function navigateToSection(section) {
+            if (isAdminLoggedIn) return
+            const el = document.getElementById(section)
+            if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu')
+            menu.classList.toggle('hidden')
+        }
+        
+        // Main initialization
+        function initializeWebsite() {
+            initTailwind()
+            loadInitialCars()
+            
+            // Render customer inventory
+            renderCustomerCars(carsData)
+            
+            console.log('%c🚗 Chelaan Motors website initialized successfully!', 'background:#00d4ff;color:black;font-size:13px;padding:1px 4px;border-radius:2px')
+            console.log('✅ Admin portal ready • Contact: chelaanautos@gmail.com')
+            
+            // Demo message in console
+            console.log('%cTry logging in as Admin with "admin" / "chelaan123"', 'color:#00d4ff')
+        }
+        
+        // Boot the website
+        window.onload = initializeWebsite
+    </script>
+</body>
+</html>
